@@ -175,17 +175,17 @@ export default function SectionManager({ children }: SectionManagerProps) {
                 return { x: 0, opacity: 1, zIndex: 0, scale: 0.95 }; // Wait behind
             }
         },
-        center: { x: 0, opacity: 1, zIndex: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+        center: { x: 0, opacity: 1, zIndex: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
         exit: (custom: { index: number; direction: 'up' | 'down' }) => {
             const isOdd = custom.index % 2 !== 0;
             // If going Down: Current (Outgoing) stays center? Or scales down?
             if (custom.direction === 'down') {
-                return { x: 0, opacity: 0.5, zIndex: 0, scale: 0.95, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } };
+                return { x: 0, opacity: 0.5, zIndex: 0, scale: 0.95, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } };
             } else {
                 // Going Up: Current (was top) slides OUT to where it came from.
                 // If it's Odd, it came from Right, so slides back to Right.
                 const xExit = isOdd ? '100%' : '-100%';
-                return { x: xExit, opacity: 1, zIndex: 10, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } };
+                return { x: xExit, opacity: 1, zIndex: 10, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } };
             }
         }
     };

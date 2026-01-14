@@ -297,7 +297,8 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
             if (currentSection < totalSections - 1 && !isAnimating) {
                 set({
                     direction: 'down',
-                    isAnimating: true
+                    isAnimating: true,
+                    currentSection: currentSection + 1
                 });
             }
         },
@@ -306,7 +307,8 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
             if (currentSection > 0 && !isAnimating) {
                 set({
                     direction: 'up',
-                    isAnimating: true
+                    isAnimating: true,
+                    currentSection: currentSection - 1
                 });
             }
         }

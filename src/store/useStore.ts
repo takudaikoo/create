@@ -26,14 +26,14 @@ export const useStore = create<StoreState>((set, get) => ({
     nextSection: () => {
         const { currentSection, totalSections, isAnimating } = get();
         if (currentSection < totalSections - 1 && !isAnimating) {
-            set({ direction: 'down', isAnimating: true });
+            set({ direction: 'down', isAnimating: true, currentSection: currentSection + 1 });
         }
     },
 
     prevSection: () => {
         const { currentSection, isAnimating } = get();
         if (currentSection > 0 && !isAnimating) {
-            set({ direction: 'up', isAnimating: true });
+            set({ direction: 'up', isAnimating: true, currentSection: currentSection - 1 });
         }
     },
 }));
