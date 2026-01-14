@@ -40,12 +40,6 @@ export const useStore = create<StoreState>((set, get) => ({
 
 // We'll need a way to commit the section change halfway through the animation
 // Adding a specific action for that
-export const commitSectionChange = () => {
-    useStore.setState((state: StoreState) => {
-        if (state.direction === 'down') {
-            return { currentSection: state.currentSection + 1 };
-        } else {
-            return { currentSection: state.currentSection - 1 };
-        }
-    });
-};
+// Section change is now driven purely by state + animation libraries
+// No manual commit needed for Framer Motion
+

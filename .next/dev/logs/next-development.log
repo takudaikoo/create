@@ -1,86 +1,76 @@
-[00:00:00.887] Server  LOG     
-[00:00:00.888] Server  LOG       We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
-[00:00:00.888] Server  LOG       The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+[00:00:02.928] Server  LOG     ✓ Ready in 1966ms
+[00:00:39.348] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:39.441] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:16.904] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:22.697] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:30.474] Server  LOG     ✓ Compiled in 500ms
+[00:07:31.581] Browser ERROR   uncaughtError: ReferenceError: handleWheel is not defined
+[00:07:33.557] Server  LOG     ✓ Compiled in 623ms
+[00:07:41.042] Browser LOG     THREE.WebGLRenderer: Context Lost.
+[00:07:41.049] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:07:42.955] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:37.110] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:26:42.757] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:15.709] Server  LOG     ✓ Compiled in 5.6s
+[00:28:16.473] Browser ERROR   ./src/components/Three/WipeEffect.tsx:4:1
+Export commitSectionChange doesn't exist in target module
+  2 | import { useFrame, useThree } from '@react-three/fiber';
+  3 | import * as THREE from 'three';
+> 4 | import { useStore, commitSectionChange } from '@/store/useStore';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Plane } from '@react-three/drei';
+  6 |
+  7 | const WipeShaderMaterial = {
 
-[00:00:00.889] Server  LOG       	- include was updated to add '.next/dev/types/**/*.ts'
-[00:00:00.889] Server  LOG     
-[00:00:00.890] Server  LOG       The following mandatory changes were made to your tsconfig.json:
+The export commitSectionChange was not found in module [project]/src/store/useStore.ts [app-client] (ecmascript).
+Did you mean to import useStore?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
 
-[00:00:00.890] Server  LOG       	- jsx was set to react-jsx (next.js uses the React automatic runtime)
-[00:00:00.890] Server  LOG     
-[00:00:01.066] Server  LOG     ✓ Ready in 702ms
-[00:02:50.202] Server  LOG     ○ Compiling / ...
-[00:03:02.007] Server  ERROR   ⨯ ./src/components/ProcessFAQ.tsx:1:10
-Ecmascript file had an error
-> 1 | import { useState } from 'react';
-    |          ^^^^^^^^
-  2 | import Section from './Section';
-  3 | import styles from './ProcessFAQ.module.css';
-  4 |
+Import traces:
+  Client Component Browser:
+    ./src/components/Three/WipeEffect.tsx [Client Component Browser]
+    ./src/components/Three/TransitionCanvas.tsx [Client Component Browser]
+    ./src/components/SectionManager.tsx [Client Component Browser]
+    ./src/components/SectionManager.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
 
-You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  Client Component SSR:
+    ./src/components/Three/WipeEffect.tsx [Client Component SSR]
+    ./src/components/Three/TransitionCanvas.tsx [Client Component SSR]
+    ./src/components/SectionManager.tsx [Client Component SSR]
+    ./src/components/SectionManager.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+[00:28:16.473] Browser ERROR   ./src/components/Three/WipeEffect.tsx:4:1
+Export commitSectionChange doesn't exist in target module
+  2 | import { useFrame, useThree } from '@react-three/fiber';
+  3 | import * as THREE from 'three';
+> 4 | import { useStore, commitSectionChange } from '@/store/useStore';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Plane } from '@react-three/drei';
+  6 |
+  7 | const WipeShaderMaterial = {
 
- Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+The export commitSectionChange was not found in module [project]/src/store/useStore.ts [app-ssr] (ecmascript).
+Did you mean to import useStore?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
 
+Import traces:
+  Client Component Browser:
+    ./src/components/Three/WipeEffect.tsx [Client Component Browser]
+    ./src/components/Three/TransitionCanvas.tsx [Client Component Browser]
+    ./src/components/SectionManager.tsx [Client Component Browser]
+    ./src/components/SectionManager.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
 
-
-Import trace:
-  Server Component:
-    ./src/components/ProcessFAQ.tsx
-    ./src/app/page.tsx
-
-
-[00:03:05.766] Browser ERROR   uncaughtError: Error: ./src/components/ProcessFAQ.tsx:1:10
-Ecmascript file had an error
-> 1 | import { useState } from 'react';
-    |          ^^^^^^^^
-  2 | import Section from './Section';
-  3 | import styles from './ProcessFAQ.module.css';
-  4 |
-
-You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
-
- Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
-
-
-
-Import trace:
-  Server Component:
-    ./src/components/ProcessFAQ.tsx
-    ./src/app/page.tsx
-
-
-[00:03:06.018] Browser ERROR   ./src/components/ProcessFAQ.tsx:1:10
-Ecmascript file had an error
-> 1 | import { useState } from 'react';
-    |          ^^^^^^^^
-  2 | import Section from './Section';
-  3 | import styles from './ProcessFAQ.module.css';
-  4 |
-
-You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
-
- Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
-
-Import trace:
-  Server Component:
-    ./src/components/ProcessFAQ.tsx
-    ./src/app/page.tsx
-[00:03:06.207] Browser ERROR   ./src/components/ProcessFAQ.tsx:1:10
-Ecmascript file had an error
-> 1 | import { useState } from 'react';
-    |          ^^^^^^^^
-  2 | import Section from './Section';
-  3 | import styles from './ProcessFAQ.module.css';
-  4 |
-
-You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
-
- Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
-
-Import trace:
-  Server Component:
-    ./src/components/ProcessFAQ.tsx
-    ./src/app/page.tsx
-[00:03:32.910] Server  LOG     ✓ Compiled in 92ms
-[00:03:34.597] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+  Client Component SSR:
+    ./src/components/Three/WipeEffect.tsx [Client Component SSR]
+    ./src/components/Three/TransitionCanvas.tsx [Client Component SSR]
+    ./src/components/SectionManager.tsx [Client Component SSR]
+    ./src/components/SectionManager.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+[00:28:43.638] Server  LOG     ✓ Compiled in 5.8s
+[00:29:02.701] Server  LOG     ✓ Finished writing to filesystem cache in 15.8s
+[00:29:38.533] Server  LOG     ○ Compiling / ...
+[00:29:45.181] Server  LOG     ✓ Compiled in 55.4s
+[00:29:46.195] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:32.430] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
