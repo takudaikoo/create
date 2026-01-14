@@ -36,7 +36,7 @@ export default function SectionManager({ children }: SectionManagerProps) {
     useEffect(() => {
         let touchStartY = 0;
 
-        const handleWheel = (e: WheelEvent) => {
+        const handleWheel = (e: any) => {
             if (useStore.getState().isAnimating) return;
 
             // Check if we are scrolling an internal element that has overflow
@@ -95,7 +95,7 @@ export default function SectionManager({ children }: SectionManagerProps) {
             const currentSectionIndex = useStore.getState().currentSection;
             const container = containerRef.current;
             if (!container) return;
-            const activeSection = container.children[currentSectionIndex] as HTMLElement;
+            const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`) as HTMLElement;
             if (!activeSection) return;
 
             const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
@@ -241,8 +241,8 @@ export default function SectionManager({ children }: SectionManagerProps) {
                         animate="center"
                         exit="exit"
                         onAnimationStart={() => useStore.getState().setAnimating(true)}
-                        // onAnimationComplete handled by onExitComplete of the leaving component usually
-                        // But strictly safe to lock/unlock via store
+                        // Add data attribute for robust querying
+                        data-section-index={currentSection}
 
                         style={{
                             position: 'absolute',

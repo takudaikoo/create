@@ -431,7 +431,7 @@ function SectionManager({ children }) {
                     const currentSectionIndex = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().currentSection;
                     const container = containerRef.current;
                     if (!container) return;
-                    const activeSection = container.children[currentSectionIndex];
+                    const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`);
                     if (!activeSection) return;
                     const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
                     const checkScroll = {
@@ -631,8 +631,8 @@ function SectionManager({ children }) {
                     animate: "center",
                     exit: "exit",
                     onAnimationStart: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().setAnimating(true),
-                    // onAnimationComplete handled by onExitComplete of the leaving component usually
-                    // But strictly safe to lock/unlock via store
+                    // Add data attribute for robust querying
+                    "data-section-index": currentSection,
                     style: {
                         position: 'absolute',
                         top: 0,
