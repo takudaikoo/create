@@ -32,105 +32,86 @@ export default function SectionManager({ children }: SectionManagerProps) {
         }
     };
 
-    // Global Event Listeners
+    // Event Handlers
+    const handleWheel = (e: React.WheelEvent) => {
+        if (useStore.getState().isAnimating) return;
+
+        const currentSectionIndex = useStore.getState().currentSection;
+        const container = containerRef.current;
+        if (!container) return;
+
+        const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`) as HTMLElement;
+
+        // Internal Scroll Logic
+        let isScrollable = false;
+        let atTop = true;
+        let atBottom = true;
+
+        if (activeSection) {
+            isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
+            const tolerance = 2;
+            atTop = activeSection.scrollTop <= tolerance;
+            atBottom = Math.abs((activeSection.scrollHeight - activeSection.scrollTop) - activeSection.clientHeight) <= tolerance;
+        }
+
+        if (e.deltaY > 5) { // Down
+            if (!isScrollable || atBottom) {
+                useStore.getState().nextSection();
+            }
+        } else if (e.deltaY < -5) { // Up
+            if (!isScrollable || atTop) {
+                useStore.getState().prevSection();
+            }
+        }
+    };
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        if (useStore.getState().isAnimating) return;
+
+        const touchEndY = e.changedTouches[0].clientY;
+        const diff = touchStartY.current - touchEndY;
+
+        const currentSectionIndex = useStore.getState().currentSection;
+        const container = containerRef.current;
+        if (!container) return;
+        const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`) as HTMLElement;
+
+        let isScrollable = false;
+        let atTop = true;
+        let atBottom = true;
+
+        if (activeSection) {
+            isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
+            const tolerance = 2;
+            atTop = activeSection.scrollTop <= tolerance;
+            atBottom = Math.abs((activeSection.scrollHeight - activeSection.scrollTop) - activeSection.clientHeight) <= tolerance;
+        }
+
+        if (diff > 5) { // Swipe Up (Scroll Down)
+            if (!isScrollable || atBottom) {
+                useStore.getState().nextSection();
+            }
+        } else if (diff < -5) {
+            if (!isScrollable || atTop) {
+                useStore.getState().prevSection();
+            }
+        }
+    };
+
+    // Keyboard support via window (safe)
     useEffect(() => {
-        let touchStartY = 0;
-
-        const handleWheel = (e: any) => {
+        const handleKeyDown = (e: KeyboardEvent) => {
             if (useStore.getState().isAnimating) return;
-
-            // Check if we are scrolling an internal element that has overflow
-            // We can check e.target
-            const target = e.target as HTMLElement;
-
-            // Simple check: does the target (or parents) have scrollable area?
-            // For now, let's just use our "active section" logic if generic robustness is hard.
-            // But relying on e.target is better for partial scrolling.
-            // However, our design is full-screen sections.
-
-            // Re-using the logic, but we need access to the current active element.
-            // We can get it via the containerRef and store state, 
-            // BUT store state in useEffect listener is stale unless we use refs or useStore.getState()
-
-            const currentSectionIndex = useStore.getState().currentSection;
-            const container = containerRef.current;
-            if (!container) return;
-
-            // FIX: Use querySelector to find the exact DOM node for the current section
-            const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`) as HTMLElement;
-            if (!activeSection) return;
-
-            const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
-
-            // Helper
-            const checkScroll = (direction: 'up' | 'down') => {
-                const tolerance = 2;
-                if (direction === 'down') {
-                    return Math.abs((activeSection.scrollHeight - activeSection.scrollTop) - activeSection.clientHeight) < tolerance;
-                } else {
-                    return activeSection.scrollTop < tolerance;
-                }
-            };
-
-            if (e.deltaY > 5) { // Down
-                if (!isScrollable || checkScroll('down')) {
-                    useStore.getState().nextSection();
-                }
-            } else if (e.deltaY < -5) { // Up
-                if (!isScrollable || checkScroll('up')) {
-                    useStore.getState().prevSection();
-                }
-            }
+            if (e.key === 'ArrowDown') useStore.getState().nextSection();
+            if (e.key === 'ArrowUp') useStore.getState().prevSection();
         };
-
-        const handleTouchStart = (e: any) => {
-            touchStartY = e.touches[0].clientY;
-        };
-
-        const handleTouchEnd = (e: any) => {
-            if (useStore.getState().isAnimating) return;
-
-            const touchEndY = e.changedTouches[0].clientY;
-            const diff = touchStartY - touchEndY;
-
-            const currentSectionIndex = useStore.getState().currentSection;
-            const container = containerRef.current;
-            if (!container) return;
-            const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`) as HTMLElement;
-            if (!activeSection) return;
-
-            const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
-
-            const checkScroll = (direction: 'up' | 'down') => {
-                const tolerance = 2;
-                if (direction === 'down') {
-                    return Math.abs((activeSection.scrollHeight - activeSection.scrollTop) - activeSection.clientHeight) < tolerance;
-                } else {
-                    return activeSection.scrollTop < tolerance;
-                }
-            };
-
-            if (diff > 5) { // Swipe Up -> Next
-                if (!isScrollable || checkScroll('down')) {
-                    useStore.getState().nextSection();
-                }
-            } else if (diff < -5) { // Swipe Down -> Prev
-                if (!isScrollable || checkScroll('up')) {
-                    useStore.getState().prevSection();
-                }
-            }
-        };
-
-        window.addEventListener('wheel', handleWheel, { passive: false });
-        window.addEventListener('touchstart', handleTouchStart, { passive: false });
-        window.addEventListener('touchend', handleTouchEnd, { passive: false });
-
-        return () => {
-            window.removeEventListener('wheel', handleWheel);
-            window.removeEventListener('touchstart', handleTouchStart);
-            window.removeEventListener('touchend', handleTouchEnd);
-        };
-    }, []); // Empty dependency array = mount once. We use useStore.getState() to get fresh values.
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
     // We need to disable native scroll on the body
     useEffect(() => {
@@ -194,17 +175,17 @@ export default function SectionManager({ children }: SectionManagerProps) {
                 return { x: 0, opacity: 1, zIndex: 0, scale: 0.95 }; // Wait behind
             }
         },
-        center: { x: 0, opacity: 1, zIndex: 1, scale: 1, transition: { duration: 0.8, ease: "easeInOut" } }, // Expo/Custom ease
+        center: { x: 0, opacity: 1, zIndex: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
         exit: (custom: { index: number; direction: 'up' | 'down' }) => {
             const isOdd = custom.index % 2 !== 0;
             // If going Down: Current (Outgoing) stays center? Or scales down?
             if (custom.direction === 'down') {
-                return { x: 0, opacity: 0.5, zIndex: 0, scale: 0.95, transition: { duration: 0.8, ease: "easeInOut" } };
+                return { x: 0, opacity: 0.5, zIndex: 0, scale: 0.95, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } };
             } else {
                 // Going Up: Current (was top) slides OUT to where it came from.
                 // If it's Odd, it came from Right, so slides back to Right.
                 const xExit = isOdd ? '100%' : '-100%';
-                return { x: xExit, opacity: 1, zIndex: 10, transition: { duration: 0.8, ease: "easeInOut" } };
+                return { x: xExit, opacity: 1, zIndex: 10, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } };
             }
         }
     };
@@ -220,6 +201,9 @@ export default function SectionManager({ children }: SectionManagerProps) {
         <>
             <div
                 ref={containerRef}
+                onWheel={handleWheel}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
                 style={{
                     height: '100vh',
                     width: '100vw',
@@ -227,6 +211,7 @@ export default function SectionManager({ children }: SectionManagerProps) {
                     position: 'relative',
                     zIndex: 1,
                     backgroundColor: '#111',
+                    touchAction: 'none', // Prevent native touch actions
                 }}
             >
                 <AnimatePresence

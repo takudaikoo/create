@@ -373,107 +373,79 @@ function SectionManager({ children }) {
             return isAtTop;
         }
     };
-    // Global Event Listeners
+    // Event Handlers
+    const handleWheel = (e)=>{
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().isAnimating) return;
+        const currentSectionIndex = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().currentSection;
+        const container = containerRef.current;
+        if (!container) return;
+        const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`);
+        // Internal Scroll Logic
+        let isScrollable = false;
+        let atTop = true;
+        let atBottom = true;
+        if (activeSection) {
+            isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
+            const tolerance = 2;
+            atTop = activeSection.scrollTop <= tolerance;
+            atBottom = Math.abs(activeSection.scrollHeight - activeSection.scrollTop - activeSection.clientHeight) <= tolerance;
+        }
+        if (e.deltaY > 5) {
+            if (!isScrollable || atBottom) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().nextSection();
+            }
+        } else if (e.deltaY < -5) {
+            if (!isScrollable || atTop) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().prevSection();
+            }
+        }
+    };
+    const handleTouchStart = (e)=>{
+        touchStartY.current = e.touches[0].clientY;
+    };
+    const handleTouchEnd = (e)=>{
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().isAnimating) return;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diff = touchStartY.current - touchEndY;
+        const currentSectionIndex = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().currentSection;
+        const container = containerRef.current;
+        if (!container) return;
+        const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`);
+        let isScrollable = false;
+        let atTop = true;
+        let atBottom = true;
+        if (activeSection) {
+            isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
+            const tolerance = 2;
+            atTop = activeSection.scrollTop <= tolerance;
+            atBottom = Math.abs(activeSection.scrollHeight - activeSection.scrollTop - activeSection.clientHeight) <= tolerance;
+        }
+        if (diff > 5) {
+            if (!isScrollable || atBottom) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().nextSection();
+            }
+        } else if (diff < -5) {
+            if (!isScrollable || atTop) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().prevSection();
+            }
+        }
+    };
+    // Keyboard support via window (safe)
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "SectionManager.useEffect": ()=>{
-            let touchStartY = 0;
-            const handleWheel = {
-                "SectionManager.useEffect.handleWheel": (e)=>{
+            const handleKeyDown = {
+                "SectionManager.useEffect.handleKeyDown": (e)=>{
                     if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().isAnimating) return;
-                    // Check if we are scrolling an internal element that has overflow
-                    // We can check e.target
-                    const target = e.target;
-                    // Simple check: does the target (or parents) have scrollable area?
-                    // For now, let's just use our "active section" logic if generic robustness is hard.
-                    // But relying on e.target is better for partial scrolling.
-                    // However, our design is full-screen sections.
-                    // Re-using the logic, but we need access to the current active element.
-                    // We can get it via the containerRef and store state, 
-                    // BUT store state in useEffect listener is stale unless we use refs or useStore.getState()
-                    const currentSectionIndex = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().currentSection;
-                    const container = containerRef.current;
-                    if (!container) return;
-                    // FIX: Use querySelector to find the exact DOM node for the current section
-                    const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`);
-                    if (!activeSection) return;
-                    const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
-                    // Helper
-                    const checkScroll = {
-                        "SectionManager.useEffect.handleWheel.checkScroll": (direction)=>{
-                            const tolerance = 2;
-                            if (direction === 'down') {
-                                return Math.abs(activeSection.scrollHeight - activeSection.scrollTop - activeSection.clientHeight) < tolerance;
-                            } else {
-                                return activeSection.scrollTop < tolerance;
-                            }
-                        }
-                    }["SectionManager.useEffect.handleWheel.checkScroll"];
-                    if (e.deltaY > 5) {
-                        if (!isScrollable || checkScroll('down')) {
-                            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().nextSection();
-                        }
-                    } else if (e.deltaY < -5) {
-                        if (!isScrollable || checkScroll('up')) {
-                            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().prevSection();
-                        }
-                    }
+                    if (e.key === 'ArrowDown') __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().nextSection();
+                    if (e.key === 'ArrowUp') __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().prevSection();
                 }
-            }["SectionManager.useEffect.handleWheel"];
-            const handleTouchStart = {
-                "SectionManager.useEffect.handleTouchStart": (e)=>{
-                    touchStartY = e.touches[0].clientY;
-                }
-            }["SectionManager.useEffect.handleTouchStart"];
-            const handleTouchEnd = {
-                "SectionManager.useEffect.handleTouchEnd": (e)=>{
-                    if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().isAnimating) return;
-                    const touchEndY = e.changedTouches[0].clientY;
-                    const diff = touchStartY - touchEndY;
-                    const currentSectionIndex = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().currentSection;
-                    const container = containerRef.current;
-                    if (!container) return;
-                    const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`);
-                    if (!activeSection) return;
-                    const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
-                    const checkScroll = {
-                        "SectionManager.useEffect.handleTouchEnd.checkScroll": (direction)=>{
-                            const tolerance = 2;
-                            if (direction === 'down') {
-                                return Math.abs(activeSection.scrollHeight - activeSection.scrollTop - activeSection.clientHeight) < tolerance;
-                            } else {
-                                return activeSection.scrollTop < tolerance;
-                            }
-                        }
-                    }["SectionManager.useEffect.handleTouchEnd.checkScroll"];
-                    if (diff > 5) {
-                        if (!isScrollable || checkScroll('down')) {
-                            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().nextSection();
-                        }
-                    } else if (diff < -5) {
-                        if (!isScrollable || checkScroll('up')) {
-                            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStore"].getState().prevSection();
-                        }
-                    }
-                }
-            }["SectionManager.useEffect.handleTouchEnd"];
-            window.addEventListener('wheel', handleWheel, {
-                passive: false
-            });
-            window.addEventListener('touchstart', handleTouchStart, {
-                passive: false
-            });
-            window.addEventListener('touchend', handleTouchEnd, {
-                passive: false
-            });
+            }["SectionManager.useEffect.handleKeyDown"];
+            window.addEventListener('keydown', handleKeyDown);
             return ({
-                "SectionManager.useEffect": ()=>{
-                    window.removeEventListener('wheel', handleWheel);
-                    window.removeEventListener('touchstart', handleTouchStart);
-                    window.removeEventListener('touchend', handleTouchEnd);
-                }
+                "SectionManager.useEffect": ()=>window.removeEventListener('keydown', handleKeyDown)
             })["SectionManager.useEffect"];
         }
-    }["SectionManager.useEffect"], []); // Empty dependency array = mount once. We use useStore.getState() to get fresh values.
+    }["SectionManager.useEffect"], []);
     // We need to disable native scroll on the body
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "SectionManager.useEffect": ()=>{
@@ -551,7 +523,12 @@ function SectionManager({ children }) {
             scale: 1,
             transition: {
                 duration: 0.8,
-                ease: "easeInOut"
+                ease: [
+                    0.16,
+                    1,
+                    0.3,
+                    1
+                ]
             }
         },
         exit: (custom)=>{
@@ -565,7 +542,12 @@ function SectionManager({ children }) {
                     scale: 0.95,
                     transition: {
                         duration: 0.8,
-                        ease: "easeInOut"
+                        ease: [
+                            0.16,
+                            1,
+                            0.3,
+                            1
+                        ]
                     }
                 };
             } else {
@@ -578,7 +560,12 @@ function SectionManager({ children }) {
                     zIndex: 10,
                     transition: {
                         duration: 0.8,
-                        ease: "easeInOut"
+                        ease: [
+                            0.16,
+                            1,
+                            0.3,
+                            1
+                        ]
                     }
                 };
             }
@@ -592,13 +579,17 @@ function SectionManager({ children }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             ref: containerRef,
+            onWheel: handleWheel,
+            onTouchStart: handleTouchStart,
+            onTouchEnd: handleTouchEnd,
             style: {
                 height: '100vh',
                 width: '100vw',
                 overflow: 'hidden',
                 position: 'relative',
                 zIndex: 1,
-                backgroundColor: '#111'
+                backgroundColor: '#111',
+                touchAction: 'none'
             },
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
                 initial: false,
@@ -639,17 +630,17 @@ function SectionManager({ children }) {
                     ]
                 }, currentSection, true, {
                     fileName: "[project]/src/components/SectionManager.tsx",
-                    lineNumber: 237,
+                    lineNumber: 222,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/SectionManager.tsx",
-                lineNumber: 232,
+                lineNumber: 217,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/SectionManager.tsx",
-            lineNumber: 221,
+            lineNumber: 202,
             columnNumber: 13
         }, this)
     }, void 0, false);
