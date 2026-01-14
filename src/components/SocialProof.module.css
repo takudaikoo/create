@@ -1,0 +1,102 @@
+.socialSection {
+    background-color: #f5f5f5;
+    /* Light contrast */
+    color: #111;
+    text-align: center;
+    padding: 120px 0;
+}
+
+.mainCopy {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.subCopy {
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.testimonials {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    background: #fff;
+    padding: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    text-align: left;
+}
+
+.imagePlaceholder {
+    width: 120px;
+    height: 120px;
+    background-color: #333;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.author {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.author strong {
+    display: block;
+    font-size: 1.1rem;
+    color: #000;
+    margin-top: 4px;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    opacity: 0.5;
+    margin-bottom: 80px;
+    flex-wrap: wrap;
+}
+
+.logoItem {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #888;
+}
+
+.ctaWrapper {
+    background: #111;
+    color: #fff;
+    padding: 60px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ctaText {
+    font-family: 'Noto Serif JP', serif;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+.ctaButton {
+    display: inline-block;
+    border: 1px solid #bd9b60;
+    color: #bd9b60;
+    padding: 14px 40px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    background: #bd9b60;
+    color: #000;
+}

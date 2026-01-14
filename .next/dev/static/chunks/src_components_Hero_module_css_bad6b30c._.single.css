@@ -1,0 +1,122 @@
+/* [project]/src/components/Hero.module.css [app-client] (css) */
+.Hero-module__ZARIfG__hero {
+  color: #fff;
+  position: relative;
+}
+
+.Hero-module__ZARIfG__videoBackground {
+  object-fit: cover;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.Hero-module__ZARIfG__videoOverlay {
+  z-index: 1;
+  background: #1119;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.Hero-module__ZARIfG__content {
+  z-index: 2;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.Hero-module__ZARIfG__copyWrapper {
+  margin-bottom: 60px;
+}
+
+.Hero-module__ZARIfG__mainCopy {
+  letter-spacing: .1em;
+  opacity: 0;
+  text-shadow: 0 4px 12px #00000080;
+  margin-bottom: 1.5rem;
+  font-family: Noto Serif JP, serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  animation: 1.5s ease-out .5s forwards Hero-module__ZARIfG__fadeIn;
+}
+
+.Hero-module__ZARIfG__subCopy {
+  opacity: 0;
+  margin-bottom: 0;
+  font-family: Noto Serif JP, serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 2;
+  animation: 1.2s ease-out 1.5s forwards Hero-module__ZARIfG__slideUp;
+}
+
+.Hero-module__ZARIfG__ctaWrapper {
+  opacity: 0;
+  animation: 1.5s ease-out 2.5s forwards Hero-module__ZARIfG__fadeIn;
+}
+
+.Hero-module__ZARIfG__ctaButton {
+  color: #fff;
+  letter-spacing: .1em;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  background: #0006;
+  border: 1px solid #ffffff4d;
+  padding: 16px 40px;
+  font-family: Inter, sans-serif;
+  font-size: .9rem;
+  text-decoration: none;
+  transition: all .4s;
+  display: inline-block;
+}
+
+.Hero-module__ZARIfG__ctaButton:hover {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 20px #fff3;
+}
+
+@keyframes Hero-module__ZARIfG__fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes Hero-module__ZARIfG__slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .Hero-module__ZARIfG__mainCopy {
+    font-size: 2rem;
+  }
+
+  .Hero-module__ZARIfG__subCopy {
+    font-size: 1rem;
+  }
+}
+
+/*# sourceMappingURL=src_components_Hero_module_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,66 @@
+/* [project]/src/components/Comparison.module.css [app-client] (css) */
+.Comparison-module__3wjtJG__comparisonSection {
+  color: #fff;
+  text-align: center;
+  background-color: #111;
+  padding: 120px 0;
+}
+
+.Comparison-module__3wjtJG__title {
+  margin-bottom: 2rem;
+  font-family: Noto Serif JP, serif;
+  font-size: 2rem;
+}
+
+.Comparison-module__3wjtJG__subtitle {
+  color: #999;
+  margin-bottom: 4rem;
+  line-height: 2;
+}
+
+.Comparison-module__3wjtJG__comparisonContainer {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  display: flex;
+}
+
+.Comparison-module__3wjtJG__comparisonBox {
+  text-align: left;
+  background: #222;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+}
+
+.Comparison-module__3wjtJG__compTitle {
+  border-bottom: 1px solid #444;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  font-family: Noto Serif JP, serif;
+  font-size: 1.5rem;
+}
+
+.Comparison-module__3wjtJG__compList {
+  padding: 0;
+  list-style: none;
+}
+
+.Comparison-module__3wjtJG__compList li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.Comparison-module__3wjtJG__highlight {
+  background: linear-gradient(145deg, #2a2a2a, #222);
+  border: 1px solid #bd9b60;
+  box-shadow: 0 0 30px #bd9b601a;
+}
+
+.Comparison-module__3wjtJG__highlight .Comparison-module__3wjtJG__compTitle {
+  color: #bd9b60;
+  border-bottom-color: #bd9b60;
+}
+
+/*# sourceMappingURL=src_components_Comparison_module_css_bad6b30c._.single.css.map*/

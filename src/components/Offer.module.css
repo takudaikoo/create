@@ -1,0 +1,90 @@
+.offerSection {
+    background-color: #111;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background: linear-gradient(145deg, #1a1a1a, #151515);
+    padding: 80px 60px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #bd9b60, #e6cfa3);
+    margin: 0 auto 40px;
+}
+
+.title {
+    font-family: 'Noto Serif JP', serif;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-family: 'Noto Serif JP', serif;
+    color: #bd9b60;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.description {
+    color: #999;
+    line-height: 2;
+    margin-bottom: 4rem;
+    font-size: 0.95rem;
+}
+
+.ctaWrapper {
+    margin-top: 2rem;
+}
+
+.microCopy {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.ctaButton {
+    display: inline-block;
+    background: linear-gradient(90deg, #bd9b60, #bd9b60);
+    background-size: 200% auto;
+    color: #000;
+    font-weight: 500;
+    padding: 18px 48px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ctaButton:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(189, 155, 96, 0.3);
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 60px 24px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+}

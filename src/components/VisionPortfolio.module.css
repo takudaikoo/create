@@ -1,0 +1,107 @@
+.visionSection {
+    background-color: #000;
+    color: #fff;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.visionTitle {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
+}
+
+.visionText {
+    font-size: 1.1rem;
+    line-height: 2.2;
+    color: #ccc;
+    font-family: 'Noto Serif JP', serif;
+}
+
+.portfolioSection {
+    background-color: #111;
+    color: #fff;
+    padding: 100px 0;
+}
+
+.portfolioTitle {
+    text-align: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2rem;
+    margin-bottom: 60px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.portfolioItem {
+    position: relative;
+    aspect-ratio: 16/9;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolioItem:hover .thumbnail {
+    transform: scale(1.05);
+}
+
+.playIcon {
+    font-size: 3rem;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.portfolioItem:hover .playIcon {
+    opacity: 1;
+}
+
+.info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.portfolioItem:hover .info {
+    transform: translateY(0);
+}
+
+.category {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #bd9b60;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

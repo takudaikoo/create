@@ -1,0 +1,171 @@
+.processSection {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2rem;
+    margin-bottom: 80px;
+}
+
+.processSteps {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.line {
+    position: absolute;
+    top: 50%;
+    /* Adjusted from top to center vertically relative to content if needed, but let's stick to simple centering line */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    top: 60px;
+    /* Aligns with dot */
+    z-index: 0;
+}
+
+.step {
+    position: relative;
+    z-index: 1;
+    background: #1a1a1a;
+    /* Mask line */
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stepNum {
+    font-family: 'Inter', sans-serif;
+    color: #bd9b60;
+    margin-bottom: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: #bd9b60;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(189, 155, 96, 0.5);
+}
+
+.stepTitle {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+}
+
+.faqSection {
+    background: #fff;
+    color: #000;
+    padding: 80px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.faqItem {
+    width: 100%;
+    max-width: 800px;
+    border-bottom: 1px solid #ddd;
+}
+
+.faqQuestion {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-family: 'Noto Serif JP', serif;
+    cursor: pointer;
+    text-align: left;
+}
+
+.faqAnswer {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    color: #444;
+    line-height: 1.8;
+}
+
+.faqAnswer.open {
+    height: auto;
+    padding-bottom: 20px;
+}
+
+.finalCtaSection {
+    background: url('/movie/placeholder_bg.jpg') no-repeat center center/cover;
+    /* Fallback */
+    position: relative;
+    padding: 160px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.finalCtaSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.finalCtaContent {
+    position: relative;
+    z-index: 2;
+}
+
+.finalTitle {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.finalNote {
+    margin-bottom: 4rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.finalButton {
+    display: inline-block;
+    background: #bd9b60;
+    color: #000;
+    padding: 20px 60px;
+    text-decoration: none;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(189, 155, 96, 0.4);
+}
+
+.finalButton:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .processSteps {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .line {
+        width: 1px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+    }
+}

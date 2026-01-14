@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 2, "column": 0}, "map": {"version":3,"sources":["file:///C:/Projects/Create/src/app/globals.css"],"sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap');\r\n\r\n:root {\r\n  --background: #111111;\r\n  --foreground: #ffffff;\r\n  --gold: #bd9b60;\r\n  --gold-light: #e6cfa3;\r\n  --secondary: #333333;\r\n}\r\n\r\nhtml,\r\nbody {\r\n  max-width: 100vw;\r\n  overflow-x: hidden;\r\n  background-color: var(--background);\r\n  color: var(--foreground);\r\n  font-family: 'Noto Serif JP', serif;\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nbody {\r\n  min-height: 100vh;\r\n}\r\n\r\nh1, h2, h3, h4, h5, h6 {\r\n  font-weight: 500;\r\n  line-height: 1.4;\r\n}\r\n\r\np {\r\n  line-height: 1.8;\r\n  letter-spacing: 0.05em;\r\n}\r\n\r\n.font-sans {\r\n    font-family: 'Inter', sans-serif;\r\n}\r\n\r\n.text-gold {\r\n    color: var(--gold);\r\n}\r\n\r\n.container {\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 24px;\r\n}\r\n"],"names":[],"mappings":"AAEA;;;;;;;;AAQA;;;;;;;;;;AAWA;;;;AAIA;;;;;AAKA;;;;;AAKA;;;;AAIA;;;;AAIA"}}]
+}

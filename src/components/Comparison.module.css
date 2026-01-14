@@ -1,0 +1,63 @@
+.comparisonSection {
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    padding: 120px 0;
+}
+
+.title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.subtitle {
+    color: #999;
+    line-height: 2;
+    margin-bottom: 4rem;
+}
+
+.comparisonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.comparisonBox {
+    background: #222;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.compTitle {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 1rem;
+}
+
+.compList {
+    list-style: none;
+    padding: 0;
+}
+
+.compList li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.highlight {
+    background: linear-gradient(145deg, #2a2a2a, #222);
+    border: 1px solid #bd9b60;
+    box-shadow: 0 0 30px rgba(189, 155, 96, 0.1);
+}
+
+.highlight .compTitle {
+    color: #bd9b60;
+    border-bottom-color: #bd9b60;
+}

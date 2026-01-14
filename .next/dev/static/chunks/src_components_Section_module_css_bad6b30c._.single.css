@@ -1,0 +1,32 @@
+/* [project]/src/components/Section.module.css [app-client] (css) */
+.Section-module__A23O5q__section {
+  width: 100%;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.Section-module__A23O5q__fullHeight {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0;
+  display: flex;
+}
+
+.Section-module__A23O5q__container {
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .Section-module__A23O5q__section {
+    padding: 60px 0;
+  }
+}
+
+/*# sourceMappingURL=src_components_Section_module_css_bad6b30c._.single.css.map*/

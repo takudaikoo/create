@@ -1,0 +1,110 @@
+/* [project]/src/components/VisionPortfolio.module.css [app-client] (css) */
+.VisionPortfolio-module__OlrlRq__visionSection {
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  display: flex;
+}
+
+.VisionPortfolio-module__OlrlRq__visionTitle {
+  letter-spacing: .1em;
+  margin-bottom: 2rem;
+  font-family: Noto Serif JP, serif;
+  font-size: 2.5rem;
+}
+
+.VisionPortfolio-module__OlrlRq__visionText {
+  color: #ccc;
+  font-family: Noto Serif JP, serif;
+  font-size: 1.1rem;
+  line-height: 2.2;
+}
+
+.VisionPortfolio-module__OlrlRq__portfolioSection {
+  color: #fff;
+  background-color: #111;
+  padding: 100px 0;
+}
+
+.VisionPortfolio-module__OlrlRq__portfolioTitle {
+  text-align: center;
+  margin-bottom: 60px;
+  font-family: Noto Serif JP, serif;
+  font-size: 2rem;
+}
+
+.VisionPortfolio-module__OlrlRq__grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+}
+
+.VisionPortfolio-module__OlrlRq__portfolioItem {
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.VisionPortfolio-module__OlrlRq__thumbnail {
+  background-position: center;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: transform .6s cubic-bezier(.2, 1, .3, 1);
+  display: flex;
+}
+
+.VisionPortfolio-module__OlrlRq__portfolioItem:hover .VisionPortfolio-module__OlrlRq__thumbnail {
+  transform: scale(1.05);
+}
+
+.VisionPortfolio-module__OlrlRq__playIcon {
+  color: #fff;
+  opacity: 0;
+  text-shadow: 0 0 20px #00000080;
+  font-size: 3rem;
+  transition: opacity .3s;
+}
+
+.VisionPortfolio-module__OlrlRq__portfolioItem:hover .VisionPortfolio-module__OlrlRq__playIcon {
+  opacity: 1;
+}
+
+.VisionPortfolio-module__OlrlRq__info {
+  background: linear-gradient(to top, #000c, #0000);
+  width: 100%;
+  padding: 20px;
+  transition: transform .3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(100%);
+}
+
+.VisionPortfolio-module__OlrlRq__portfolioItem:hover .VisionPortfolio-module__OlrlRq__info {
+  transform: translateY(0);
+}
+
+.VisionPortfolio-module__OlrlRq__category {
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #bd9b60;
+  font-family: Inter, sans-serif;
+  font-size: .9rem;
+}
+
+@media (max-width: 768px) {
+  .VisionPortfolio-module__OlrlRq__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=src_components_VisionPortfolio_module_css_bad6b30c._.single.css.map*/

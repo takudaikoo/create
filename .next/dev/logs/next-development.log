@@ -1,0 +1,86 @@
+[00:00:00.887] Server  LOG     
+[00:00:00.888] Server  LOG       We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+[00:00:00.888] Server  LOG       The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+[00:00:00.889] Server  LOG       	- include was updated to add '.next/dev/types/**/*.ts'
+[00:00:00.889] Server  LOG     
+[00:00:00.890] Server  LOG       The following mandatory changes were made to your tsconfig.json:
+
+[00:00:00.890] Server  LOG       	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+[00:00:00.890] Server  LOG     
+[00:00:01.066] Server  LOG     ✓ Ready in 702ms
+[00:02:50.202] Server  LOG     ○ Compiling / ...
+[00:03:02.007] Server  ERROR   ⨯ ./src/components/ProcessFAQ.tsx:1:10
+Ecmascript file had an error
+> 1 | import { useState } from 'react';
+    |          ^^^^^^^^
+  2 | import Section from './Section';
+  3 | import styles from './ProcessFAQ.module.css';
+  4 |
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/ProcessFAQ.tsx
+    ./src/app/page.tsx
+
+
+[00:03:05.766] Browser ERROR   uncaughtError: Error: ./src/components/ProcessFAQ.tsx:1:10
+Ecmascript file had an error
+> 1 | import { useState } from 'react';
+    |          ^^^^^^^^
+  2 | import Section from './Section';
+  3 | import styles from './ProcessFAQ.module.css';
+  4 |
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/ProcessFAQ.tsx
+    ./src/app/page.tsx
+
+
+[00:03:06.018] Browser ERROR   ./src/components/ProcessFAQ.tsx:1:10
+Ecmascript file had an error
+> 1 | import { useState } from 'react';
+    |          ^^^^^^^^
+  2 | import Section from './Section';
+  3 | import styles from './ProcessFAQ.module.css';
+  4 |
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+Import trace:
+  Server Component:
+    ./src/components/ProcessFAQ.tsx
+    ./src/app/page.tsx
+[00:03:06.207] Browser ERROR   ./src/components/ProcessFAQ.tsx:1:10
+Ecmascript file had an error
+> 1 | import { useState } from 'react';
+    |          ^^^^^^^^
+  2 | import Section from './Section';
+  3 | import styles from './ProcessFAQ.module.css';
+  4 |
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+Import trace:
+  Server Component:
+    ./src/components/ProcessFAQ.tsx
+    ./src/app/page.tsx
+[00:03:32.910] Server  LOG     ✓ Compiled in 92ms
+[00:03:34.597] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
