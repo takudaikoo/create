@@ -56,7 +56,8 @@ export default function SectionManager({ children }: SectionManagerProps) {
             const container = containerRef.current;
             if (!container) return;
 
-            const activeSection = container.children[currentSectionIndex] as HTMLElement;
+            // FIX: Use querySelector to find the exact DOM node for the current section
+            const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`) as HTMLElement;
             if (!activeSection) return;
 
             const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
@@ -82,11 +83,11 @@ export default function SectionManager({ children }: SectionManagerProps) {
             }
         };
 
-        const handleTouchStart = (e: TouchEvent) => {
+        const handleTouchStart = (e: any) => {
             touchStartY = e.touches[0].clientY;
         };
 
-        const handleTouchEnd = (e: TouchEvent) => {
+        const handleTouchEnd = (e: any) => {
             if (useStore.getState().isAnimating) return;
 
             const touchEndY = e.changedTouches[0].clientY;
@@ -143,7 +144,7 @@ export default function SectionManager({ children }: SectionManagerProps) {
     // Usually good practice, though absolute positioning might keep them fresh if unmounted. 
     // But here they are always mounted.
     useEffect(() => {
-        const activeSection = containerRef.current?.children[currentSection] as HTMLElement;
+        const activeSection = containerRef.current?.querySelector(`[data-section-index="${currentSection}"]`) as HTMLElement;
         if (activeSection) {
             activeSection.scrollTop = 0;
         }
@@ -193,17 +194,17 @@ export default function SectionManager({ children }: SectionManagerProps) {
                 return { x: 0, opacity: 1, zIndex: 0, scale: 0.95 }; // Wait behind
             }
         },
-        center: { x: 0, opacity: 1, zIndex: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }, // Expo/Custom ease
+        center: { x: 0, opacity: 1, zIndex: 1, scale: 1, transition: { duration: 0.8, ease: "easeInOut" } }, // Expo/Custom ease
         exit: (custom: { index: number; direction: 'up' | 'down' }) => {
             const isOdd = custom.index % 2 !== 0;
             // If going Down: Current (Outgoing) stays center? Or scales down?
             if (custom.direction === 'down') {
-                return { x: 0, opacity: 0.5, zIndex: 0, scale: 0.95, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } };
+                return { x: 0, opacity: 0.5, zIndex: 0, scale: 0.95, transition: { duration: 0.8, ease: "easeInOut" } };
             } else {
                 // Going Up: Current (was top) slides OUT to where it came from.
                 // If it's Odd, it came from Right, so slides back to Right.
                 const xExit = isOdd ? '100%' : '-100%';
-                return { x: xExit, opacity: 1, zIndex: 10, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } };
+                return { x: xExit, opacity: 1, zIndex: 10, transition: { duration: 0.8, ease: "easeInOut" } };
             }
         }
     };

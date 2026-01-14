@@ -375,7 +375,8 @@ function SectionManager({ children }) {
             const currentSectionIndex = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$store$2f$useStore$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useStore"].getState().currentSection;
             const container = containerRef.current;
             if (!container) return;
-            const activeSection = container.children[currentSectionIndex];
+            // FIX: Use querySelector to find the exact DOM node for the current section
+            const activeSection = container.querySelector(`[data-section-index="${currentSectionIndex}"]`);
             if (!activeSection) return;
             const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
             // Helper
@@ -454,7 +455,7 @@ function SectionManager({ children }) {
     // Usually good practice, though absolute positioning might keep them fresh if unmounted. 
     // But here they are always mounted.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const activeSection = containerRef.current?.children[currentSection];
+        const activeSection = containerRef.current?.querySelector(`[data-section-index="${currentSection}"]`);
         if (activeSection) {
             activeSection.scrollTop = 0;
         }
@@ -514,12 +515,7 @@ function SectionManager({ children }) {
             scale: 1,
             transition: {
                 duration: 0.8,
-                ease: [
-                    0.16,
-                    1,
-                    0.3,
-                    1
-                ]
+                ease: "easeInOut"
             }
         },
         exit: (custom)=>{
@@ -533,12 +529,7 @@ function SectionManager({ children }) {
                     scale: 0.95,
                     transition: {
                         duration: 0.8,
-                        ease: [
-                            0.16,
-                            1,
-                            0.3,
-                            1
-                        ]
+                        ease: "easeInOut"
                     }
                 };
             } else {
@@ -551,12 +542,7 @@ function SectionManager({ children }) {
                     zIndex: 10,
                     transition: {
                         duration: 0.8,
-                        ease: [
-                            0.16,
-                            1,
-                            0.3,
-                            1
-                        ]
+                        ease: "easeInOut"
                     }
                 };
             }
@@ -617,17 +603,17 @@ function SectionManager({ children }) {
                     ]
                 }, currentSection, true, {
                     fileName: "[project]/src/components/SectionManager.tsx",
-                    lineNumber: 236,
+                    lineNumber: 237,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/SectionManager.tsx",
-                lineNumber: 231,
+                lineNumber: 232,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/SectionManager.tsx",
-            lineNumber: 220,
+            lineNumber: 221,
             columnNumber: 13
         }, this)
     }, void 0, false);
