@@ -4,6 +4,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Premium Video Strategy',
     description: '映像の『格』が、企業の『格』を決める。',
+    icons: {
+        icon: '/icon.png',
+    },
 };
 
 export default function RootLayout({
