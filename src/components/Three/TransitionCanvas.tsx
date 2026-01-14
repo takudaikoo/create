@@ -10,7 +10,7 @@ export default function TransitionCanvas() {
             left: 0,
             width: '100vw',
             height: '100vh',
-            zIndex: 9999, // High z-index to sit on top
+            zIndex: 9999, // High z-index to sit on top of content
             pointerEvents: 'none', // Allow clicks to pass through when transparent
         }}>
             <Canvas orthographic camera={{ zoom: 1, position: [0, 0, 10] }}>

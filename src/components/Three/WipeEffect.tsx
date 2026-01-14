@@ -107,7 +107,16 @@ export function WipeEffect() {
     const speed = 1.5; // Multiplier for delta time
 
     useFrame((state, delta) => {
-        if (!isAnimating && progress.current === 0) return;
+        // Safety check: if not animating, ensure progress is 0
+        if (!isAnimating) {
+            if (progress.current !== 0) {
+                progress.current = 0;
+                if (shaderRef.current) {
+                    shaderRef.current.uniforms.uProgress.value = 0;
+                }
+            }
+            return;
+        }
 
         if (isAnimating) {
             progress.current += delta * speed;
@@ -123,9 +132,6 @@ export function WipeEffect() {
                 progress.current = 0;
                 setAnimating(false);
             }
-        } else {
-            // Reset if somehow stuck, though logic above handles it
-            progress.current = 0;
         }
 
         if (shaderRef.current) {

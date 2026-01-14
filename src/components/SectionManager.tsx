@@ -44,7 +44,7 @@ export default function SectionManager({ children }: SectionManagerProps) {
 
         const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
 
-        if (e.deltaY > 0) { // Scrolling Down
+        if (e.deltaY > 20) { // Scrolling Down
             if (!isScrollable || checkScroll('down', activeSection)) {
                 // If not scrollable OR at bottom, trigger next
                 nextSection();
@@ -53,7 +53,7 @@ export default function SectionManager({ children }: SectionManagerProps) {
                 // But we need to stop propagation if we were hijacking it? 
                 // Actually, standard behavior is fine here.
             }
-        } else if (e.deltaY < 0) { // Scrolling Up
+        } else if (e.deltaY < -20) { // Scrolling Up
             if (!isScrollable || checkScroll('up', activeSection)) {
                 prevSection();
             }
@@ -75,11 +75,11 @@ export default function SectionManager({ children }: SectionManagerProps) {
 
         const isScrollable = activeSection.scrollHeight > activeSection.clientHeight;
 
-        if (diff > 50) { // Swipe Up -> Next
+        if (diff > 20) { // Swipe Up -> Next
             if (!isScrollable || checkScroll('down', activeSection)) {
                 nextSection();
             }
-        } else if (diff < -50) { // Swipe Down -> Prev
+        } else if (diff < -20) { // Swipe Down -> Prev
             if (!isScrollable || checkScroll('up', activeSection)) {
                 prevSection();
             }
@@ -118,10 +118,12 @@ export default function SectionManager({ children }: SectionManagerProps) {
                     height: '100vh',
                     width: '100vw',
                     overflow: 'hidden',
-                    position: 'relative'
+                    position: 'relative',
+                    zIndex: 1,
+                    backgroundColor: '#111', // Ensure background is dark
                 }}
             >
-                {children.map((child, index) => (
+                {React.Children.map(children, (child, index) => (
                     <div
                         key={index}
                         style={{
@@ -132,12 +134,16 @@ export default function SectionManager({ children }: SectionManagerProps) {
                             height: '100%',
                             // Allow internal scrolling
                             overflowY: 'auto',
-                            // Hide scrollbar for aesthetics (optional, maybe standard is better)
-                            scrollbarWidth: 'none', // Firefox
-                            msOverflowStyle: 'none', // IE/Edge
+                            // Hide scrollbar for aesthetics
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
 
+                            // Visibility Logic
                             opacity: currentSection === index ? 1 : 0,
+                            visibility: currentSection === index ? 'visible' : 'hidden', // Add visibility for better browser optimization
                             pointerEvents: currentSection === index ? 'auto' : 'none',
+                            zIndex: currentSection === index ? 10 : 0, // Ensure active section is on top within container
+                            transition: 'opacity 0.1s linear', // smooth fallback
                         }}
                     >
                         {/* Hide scrollbar for Chrome/Safari */}
